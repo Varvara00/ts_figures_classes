@@ -3,32 +3,23 @@ export interface Figure {
 }
 
 export class Triangle implements Figure {
-  color: string;
+  shape = 'triangle';
 
-  shape: string;
-
-  a: number;
-
-  b: number;
-
-  c: number;
-
-  constructor(color: string, a: number, b: number, c: number) {
+  constructor(
+    public color: string,
+    public a: number,
+    public b: number,
+    public c: number,
+  ) {
     if (a + b <= c || a + c <= b || b + c <= a) {
       throw new Error(
-        'Invalid triangle: the longest side must be less than the sum of...',
+        'Invalid triangle: the longest side must be less than the...',
       );
     }
 
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error('Triangle sides must be greater than 0.');
     }
-
-    this.color = color;
-    this.a = a;
-    this.b = b;
-    this.c = c;
-    this.shape = 'triangle';
   }
 
   getArea(): number {
@@ -41,19 +32,15 @@ export class Triangle implements Figure {
 }
 
 export class Circle implements Figure {
-  color: string;
+  shape = 'circle';
 
-  radius: number;
-
-  shape: string;
-
-  constructor(color: string, radius: number) {
+  constructor(
+    public color: string,
+    public radius: number,
+  ) {
     if (radius <= 0) {
-      throw new Error('Circle sides must be greater than 0.');
+      throw new Error('Radius must be greater than 0.');
     }
-    this.color = color;
-    this.radius = radius;
-    this.shape = 'circle';
   }
 
   getArea(): number {
@@ -64,23 +51,16 @@ export class Circle implements Figure {
 }
 
 export class Rectangle implements Figure {
-  color: string;
+  shape = 'rectangle';
 
-  width: number;
-
-  height: number;
-
-  shape: string;
-
-  constructor(color: string, width: number, height: number) {
+  constructor(
+    public color: string,
+    public width: number,
+    public height: number,
+  ) {
     if (width <= 0 || height <= 0) {
-      throw new Error('Rectangle sides must be greater than 0.');
+      throw new Error('Width and height must be greater than 0.');
     }
-
-    this.color = color;
-    this.width = width;
-    this.height = height;
-    this.shape = 'rectangle';
   }
 
   getArea(): number {
@@ -96,6 +76,6 @@ export function getInfo(figure: Figure): string {
   } else if (figure instanceof Rectangle) {
     return `A ${figure.color} rectangle - ${figure.getArea()}`;
   } else {
-    throw new Error('Unknown figure type');
+    throw new Error('Unknown figure type.');
   }
 }
